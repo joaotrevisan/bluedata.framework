@@ -33,7 +33,7 @@ class FilteredListView(ListView):
         return context
 
 
-# Get signed url from Amazon S3
+# Get the signed url from Amazon S3
 # use this url to upload files directly
 #
 class SignS3(LoginRequiredMixin, View):
