@@ -1,0 +1,8 @@
+{% load bluedata_tags %}
+
+<tr onclick="window.location='{% url template_url_update object.id %}'" class="cursor-pointer">
+    {% for item in fields %}
+        {% render_td object|hash:item.field item.type as td %}
+        {{ td|safe }}
+    {% endfor %}
+</tr>

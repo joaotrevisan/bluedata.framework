@@ -1,0 +1,42 @@
+{% load widget_tweaks %}
+
+
+<div class="form-group col-md-{{col}}" id="div_{{ field.name }}">
+    {% if field.field.widget.input_type == 'checkbox' %}
+        <label class="checkbox">
+            <input type="checkbox" {% if field.value %} checked {% endif %} name="{{ field.name }}" id="id_{{ field.name }}" >
+            <span></span> &nbsp;&nbsp;{{ field.label }}
+        </label>
+    {% else %}
+        {% if field.field.required %}
+            <div class="bold">
+                {{ field.label_tag }}
+            </div>
+        {% else %}
+            {{ field.label_tag }}
+        {% endif %}
+
+        {% if field.field.widget.input_type == 'file' %}
+            <div></div>
+            <div class="custom-file">
+              <input type="file" name="{{field.name}}" class="custom-file-input" id="id_{{field.name}}">
+              <label class="custom-file-label">{{field.value|default_if_none:''}}</label>
+            </div>
+
+            <div class="mt-2">
+              <label class="k-checkbox">
+                <input type="checkbox" name="{{field.name}}-clear" id="{{field.name}}-clear_id"> Limpar
+                <span></span>
+              </label>
+            </div>
+        {% else %}
+            {{ field|add_class:'form-control' }}
+        {% endif %}
+    {% endif %}
+
+    {% if field.help_text %}
+        <span class="form-text text-muted">{{ field.help_text }}</span>
+    {% endif %}
+
+    <span class="form-text text-danger">{{ field.errors }}</span>
+</div>

@@ -1,0 +1,36 @@
+{% if on_table %}
+    <tr>
+        <td colspan="99">nenhum registro encotrado</td>
+    </tr>
+{% elif on_list %}
+    <!--begin::Item-->
+    <div class="d-flex flex-center pb-6">
+        <!--begin::Bullet-->
+        <span class="bullet bullet-bar bg-light-secondary align-self-stretch mr-4 my-1"></span>
+        <!--end::Bullet-->
+        <!--begin::Text-->
+        <div class="d-flex flex-column flex-grow-1">
+            <a class="text-dark-50 text-hover-secondary font-size-lg mb-1">nenhum registro encontrado</a>
+        </div>
+        <!--end::Text-->
+    </div>
+    <!--end::Item-->
+{% elif add_col %}
+    <div class="col-12">
+        <div class="card card-custom gutter-b">
+            <div class="card-body d-flex align-items-center">
+                <!--begin::Description-->
+                <div class="m-0 text-dark-50 font-weight-bold font-size-lg">nenhum registro encotrado</div>
+                <!--end::Description-->
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="card card-custom gutter-b">
+        <div class="card-body d-flex align-items-center">
+            <!--begin::Description-->
+            <div class="m-0 text-dark-50 font-weight-bold font-size-lg">nenhum registro encotrado</div>
+            <!--end::Description-->
+        </div>
+    </div>
+{% endif %}

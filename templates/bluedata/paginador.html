@@ -1,0 +1,32 @@
+<!-- Este paginador combina filtro + paginação -->
+<!-- Somente pode ser utilizado junto com a tag param_replace -->
+
+{% load crud_tags %}
+
+{% if is_paginated %}
+    <ul class="pagination justify-content-center mt-4 sm-mt-3 mb-0">
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?{% param_replace page=1 %}" tabindex="-1"><i class="fas fa-angle-double-left"></i></a>
+            </li>
+            <li class="page-item"><a class="page-link" href="?{% param_replace page=page_obj.previous_page_number %}" style="line-height: 1.4"><strong>{{ page_obj.previous_page_number }}</strong></a></li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1"><i class="fas fa-angle-double-left"></i></a>
+            </li>
+        {% endif %}
+
+        <li class="page-item active"><a class="page-link k-bg-fill-red" style="line-height: 1.4"><strong>{{ page_obj.number }}</strong></a></li>
+
+        {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?{% param_replace page=page_obj.next_page_number %}" style="line-height: 1.4"><strong>{{ page_obj.next_page_number }}</strong></a></li>
+            <li class="page-item">
+                <a class="page-link" href="?{% param_replace page=paginator.num_pages %}"><i class="fas fa-angle-double-right"></i></a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link"><i class="fas fa-angle-double-right"></i></a>
+            </li>
+        {% endif %}
+    </ul>
+{% endif %}

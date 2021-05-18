@@ -1,0 +1,16 @@
+{% if form.errors %}
+    <!--begin::Separator-->
+    <div class="separator separator-dashed my-7"></div>
+    <!--end::Separator-->
+
+    <div id="errors">
+        <div class="inner">
+            {{ form.non_field_errors }}
+            {% for field in form %}
+                {% if field.errors %}
+                <p><b>{{ field.label }}</b>: {{ field.errors|striptags }}</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
