@@ -4,17 +4,25 @@ import boto3
 from botocore.config import Config
 from decouple import config
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views import View
-from django.views.generic import ListView
-from bluedata.helpers import remover_acentos
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+
+from bluedata.defs import set_context_create, set_message, set_context_list, set_context_update, set_context_delete, \
+    toggle_active
+from bluedata.helpers import remover_acentos, reverse_url
 
 
 # Filtering and Pagination with Django
 # https://www.caktusgroup.com/blog/2018/10/18/filtering-and-pagination-django/
 #
-class FilteredListView(ListView):
+class BaseListView(LoginRequiredMixin, ListView):
     filterset_class = None
+    base_url = None
+    model_text = None
+    fields = None
+    paginate_by = 5
+    template_name = 'bluedata/list.html'
 
     def get_queryset(self):
         # Get the queryset however you usually would.  For example:
@@ -28,9 +36,72 @@ class FilteredListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        set_context_list(context, self.base_url, self.model_text)
         # Pass the filterset to the template - it provides the form.
         context['filterset'] = self.filterset
+        context['fields'] = self.fields
         return context
+
+
+class BaseCreateView(LoginRequiredMixin, CreateView):
+    base_url = None
+    model_text = None
+    template_name = 'bluedata/form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        set_context_create(context, self, self.base_url, self.model_text)
+        return context
+
+    def get_success_url(self):
+        set_message(self, 'Registro criado com sucesso')
+        return reverse_url('{}_update'.format(self.base_url), [self.object.id])
+
+
+# Update
+#
+class BaseUpdateView(LoginRequiredMixin, UpdateView):
+    base_url = None
+    model_text = None
+    template_name = 'bluedata/form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        set_context_update(context, self, self.base_url, self.model_text)
+        return context
+
+    def get_success_url(self):
+        set_message(self, 'Registro alterado com sucesso')
+        return reverse_url('teste_update', [self.object.id])
+
+
+# Delete
+#
+class BaseDeleteView(LoginRequiredMixin, DeleteView):
+    base_url = None
+    model_text = None
+    template_name = 'bluedata/delete.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        set_context_delete(context, self, self.base_url, self.model_text)
+        return context
+
+    def get_success_url(self):
+        set_message(self, 'Registro excluído com sucesso')
+        return reverse_url('teste_list')
+
+
+# ToggleActive
+#
+class BaseActiveView(LoginRequiredMixin, View):
+    model = None
+    base_url = None
+
+    def get(self, *args, **kwargs):
+        msg = toggle_active(self.model.objects.get(id=kwargs['pk']))
+        set_message(self, msg)
+        return HttpResponseRedirect(reverse_url('{}_list'.format(self.base_url)))
 
 
 # Get signed url from Amazon S3
