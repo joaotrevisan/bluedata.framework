@@ -1,0 +1,19 @@
+{% if btn.icon %}
+    <!--hide on screens smaller than md-->
+    <div class="d-none d-md-block">
+        <a href="{{btn.url}}" class="btn {{btn.color}} font-weight-bolder mr-2">
+            <i class="{{btn.icon}}"></i>
+            {{btn.title}}
+        </a>
+    </div>
+    <!--hide on screens wider than md-->
+    <div class="d-md-none">
+        <a href="{{btn.url}}" class="btn btn-icon {{btn.color}} font-weight-bolder mr-2">
+            <i class="{{btn.icon}}"></i>
+        </a>
+    </div>
+{% else %}
+    <a href="{{btn.url}}" class="btn {{btn.color}} font-weight-bolder ml-2">
+        {{btn.title}}
+    </a>
+{% endif %}

@@ -1,15 +1,15 @@
 import json
 import boto3
 
-from botocore.config import Config
 from decouple import config
+from botocore.config import Config
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from bluedata.defs import set_context_create, set_message, set_context_list, set_context_update, set_context_delete, \
-    toggle_active
+from bluedata.defs import set_context_create, set_context_list, set_context_update, set_context_delete
+from bluedata.defs import set_message, toggle_active
 from bluedata.helpers import remover_acentos, reverse_url
 
 
@@ -19,10 +19,10 @@ from bluedata.helpers import remover_acentos, reverse_url
 class BaseListView(LoginRequiredMixin, ListView):
     filterset_class = None
     base_url = None
-    model_text = None
+    template_title = None
     fields = None
     paginate_by = 5
-    template_name = 'bluedata/list.html'
+    template_name = 'bluedata_templates/list.html'
 
     def get_queryset(self):
         # Get the queryset however you usually would.  For example:
@@ -36,7 +36,7 @@ class BaseListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        set_context_list(context, self.base_url, self.model_text)
+        set_context_list(context, self.base_url, self.template_title)
         # Pass the filterset to the template - it provides the form.
         context['filterset'] = self.filterset
         context['fields'] = self.fields
@@ -45,12 +45,12 @@ class BaseListView(LoginRequiredMixin, ListView):
 
 class BaseCreateView(LoginRequiredMixin, CreateView):
     base_url = None
-    model_text = None
-    template_name = 'bluedata/form.html'
+    template_title = None
+    template_name = 'bluedata_templates/form.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        set_context_create(context, self, self.base_url, self.model_text)
+        set_context_create(context, self, self.base_url, self.template_title)
         return context
 
     def get_success_url(self):
@@ -62,12 +62,12 @@ class BaseCreateView(LoginRequiredMixin, CreateView):
 #
 class BaseUpdateView(LoginRequiredMixin, UpdateView):
     base_url = None
-    model_text = None
-    template_name = 'bluedata/form.html'
+    template_title = None
+    template_name = 'bluedata_templates/form.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        set_context_update(context, self, self.base_url, self.model_text)
+        set_context_update(context, self, self.base_url, self.template_title)
         return context
 
     def get_success_url(self):
@@ -79,12 +79,12 @@ class BaseUpdateView(LoginRequiredMixin, UpdateView):
 #
 class BaseDeleteView(LoginRequiredMixin, DeleteView):
     base_url = None
-    model_text = None
-    template_name = 'bluedata/delete.html'
+    template_title = None
+    template_name = 'bluedata_templates/delete.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        set_context_delete(context, self, self.base_url, self.model_text)
+        set_context_delete(context, self, self.base_url, self.template_title)
         return context
 
     def get_success_url(self):
