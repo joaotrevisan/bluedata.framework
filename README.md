@@ -13,6 +13,14 @@ O nome do template pode ser sobrescrito em set_context_[list, create, update, de
 
 # INSTALAÇÃO
 
+SETTINGS.PY
+
+INSTALLED_APPS = [
+...
+'bluedata'
+...
+]
+
 ADICIONAR NO TEMPLATE PRINCIPAL
 
 <!--begin::Buedata Style-->
