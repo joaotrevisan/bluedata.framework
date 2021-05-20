@@ -2,23 +2,18 @@
 Componente bluedata: App
 
 
-###############################################################################
-#    REQUISITOS
-###############################################################################
+# REQUISITOS
 
-#   Incluir a pasta "bluedata" na raiz do projeto
-    git submodule add https://github.com/joaotrevisan/bluedata.app.git bluedata
+Incluir a pasta "bluedata" na raiz do projeto
+git submodule add https://github.com/joaotrevisan/bluedata.app.git bluedata
 
-#   O template principal (/templates) deve chamar "base.html"
-    O nome do template pode ser sobrescrito em set_context_[list, create, update, delete],
-        através da variável context['template']
+O template principal (/templates) deve chamar "base.html"
+O nome do template pode ser sobrescrito em set_context_[list, create, update, delete], através da variável context['template']
 
 
-###############################################################################
-#    INSTALAÇÃO
-###############################################################################
+# INSTALAÇÃO
 
-#   ADICIONAR NO TEMPLATE PRINCIPAL
+ADICIONAR NO TEMPLATE PRINCIPAL
 
 <!--begin::Buedata Style-->
 <style>{% include 'bluedata_static/style.css' %}</style>
@@ -29,14 +24,10 @@ Componente bluedata: App
 <!--end::Buedata Style-->
 
 
-###############################################################################
-#    AUTOMAÇÃO
-###############################################################################
+# AUTOMAÇÃO
 
-# CRIANDO O NOVO APP
-
+CRIANDO O NOVO APP
 python manage.py startapp APP_NAME
 
-# RODANDO AUTOMAÇÃO
-
+RODANDO AUTOMAÇÃO
 python manage.py bluedata_cmd "app_path" "model_name" "base_url"
