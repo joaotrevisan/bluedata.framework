@@ -13,6 +13,8 @@ O nome do template pode ser sobrescrito em set_context_[list, create, update, de
 
 # INSTALAÇÃO
 
+[instalar] pip install django-filter
+
 SETTINGS.PY
 
 INSTALLED_APPS = [
@@ -38,4 +40,4 @@ CRIANDO O NOVO APP
 python manage.py startapp APP_NAME
 
 RODANDO AUTOMAÇÃO
-python manage.py bluedata_cmd "app_path" "model_name" "base_url"
+python manage.py bluedata_cmd "apps/aluno" "Aluno" "aluno"
