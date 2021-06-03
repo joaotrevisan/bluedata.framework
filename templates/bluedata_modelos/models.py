@@ -9,12 +9,12 @@
 #     # uuid
 #     id = models.UUIDField(
 #         primary_key=True, unique=True, default=uuid.uuid4, editable=False)
-#     # texto slug
+#     # string de pesquisa
 #     slug = models.SlugField(
 #         max_length=250, blank=True, null=True, unique=True, editable=False)
-#     # texto da tag
-#     descricao = models.CharField(
-#         max_length=255, verbose_name='Descrição')
+#     # título principal
+#     titulo = models.CharField(
+#         max_length=255, verbose_name='Título')
 #     # exibe ou não
 #     is_active = models.BooleanField(
 #         default=True, verbose_name='Ativo')
@@ -29,11 +29,11 @@
 #     class Meta:
 #         verbose_name = '[model_name]'
 #         verbose_name_plural = '[model_name]s'
-#         ordering = ['-is_active', 'descricao']
+#         ordering = ['-is_active', 'titulo']
 #
 #     def save(self, *args, **kwargs):
 #         self.slug = get_unique_slug(self, [model_name])
 #         super([model_name], self).save(*args, **kwargs)
 #
 #     def __str__(self):
-#         return self.descricao
+#         return self.titulo

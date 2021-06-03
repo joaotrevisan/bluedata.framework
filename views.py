@@ -21,7 +21,7 @@ class BaseListView(LoginRequiredMixin, ListView):
     base_url = None
     template_title = None
     fields = None
-    paginate_by = 5
+    paginate_by = 7
     template_name = 'bluedata_templates/list.html'
 
     def get_queryset(self):
@@ -72,7 +72,7 @@ class BaseUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         set_message(self, 'Registro alterado com sucesso')
-        return reverse_url('teste_update', [self.object.id])
+        return reverse_url('{}_update'.format(self.base_url), [self.object.id])
 
 
 # Delete
@@ -89,7 +89,7 @@ class BaseDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         set_message(self, 'Registro excluído com sucesso')
-        return reverse_url('teste_list')
+        return reverse_url('{}_list'.format(self.base_url))
 
 
 # ToggleActive

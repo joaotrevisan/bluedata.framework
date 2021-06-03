@@ -5,85 +5,100 @@
 
     <!--begin::Inativo-->
     {% if template_url_active and not object.is_active %}
-        <div class="container">
-            <div class="alert alert-custom alert-outline-dark p-2 pl-5" role="alert">
-                <div class="alert-icon"><i class="flaticon-warning"></i></div>
-                <div class="alert-text font-weight-bolder">Esse registro está inativo!</div>
+        <!--begin::Notice-->
+        <div class="card card-custom gutter-b">
+            <div class="card-body d-flex align-items-center py-5 py-lg-13">
+                <!--begin::Icon-->
+                <div class="d-flex flex-center position-relative ml-5 mr-15 ml-lg-9">
+                    <span class="svg-icon svg-icon-5x svg-icon-primary position-absolute opacity-15">
+                        <!--begin::Svg Icon | path:/keen/theme/demo1/dist/assets/media/svg/icons/Layout/Layout-polygon.svg-->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="70px" height="70px" viewBox="0 0 70 70" fill="none">
+                            <g stroke="none" stroke-width="1" fill-rule="evenodd">
+                                <path d="M28 4.04145C32.3316 1.54059 37.6684 1.54059 42 4.04145L58.3109 13.4585C62.6425 15.9594 65.3109 20.5812 65.3109 25.5829V44.4171C65.3109 49.4188 62.6425 54.0406 58.3109 56.5415L42 65.9585C37.6684 68.4594 32.3316 68.4594 28 65.9585L11.6891 56.5415C7.3575 54.0406 4.68911 49.4188 4.68911 44.4171V25.5829C4.68911 20.5812 7.3575 15.9594 11.6891 13.4585L28 4.04145Z" fill="#000000"></path>
+                            </g>
+                        </svg>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="svg-icon svg-icon-2x svg-icon-primary position-absolute">
+                        <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo3/dist/../src/media/svg/icons/Code/Warning-1-circle.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24"/>
+                                <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10"/>
+                                <rect fill="#000000" x="11" y="7" width="2" height="8" rx="1"/>
+                                <rect fill="#000000" x="11" y="16" width="2" height="2" rx="1"/>
+                            </g>
+                        </svg><!--end::Svg Icon-->
+                    </span>
+                </div>
+                <!--end::Icon-->
+                <!--begin::Description-->
+                <div class="m-0 text-dark-50 font-weight-bold font-size-lg">Esse registro está <a class="font-weight-bold">inativo</a>!</div>
+                <!--end::Description-->
             </div>
         </div>
+        <!--end::Notice-->
     {% endif %}
     <!--end::Inativo-->
 
-    <div class="d-flex flex-column flex-column-fluid" id="kt_content">
-        <!--begin::Form-->
-        <form class="form" method="post" id="kt_form" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="d-flex flex-column-fluid mt-6 mt-lg-8">
-                <!--begin::Container-->
-                <div class="container">
-                    <!--begin::Card-->
-                    <div class="card card-custom" id="kt_page_sticky_card">
-                        <div class="card-header" style="">
-                            <div class="card-title">
-                                <h3 class="card-label">
-                                    {{ template_title }}
-                                    <i class="mr-2"></i>
-                                    {% if template_subtitle %}
-                                        <small class="text-primary">{{ template_subtitle|lower }}</small>
-                                    {% endif %}
-                                </h3>
-                            </div>
-                            <div class="card-toolbar">
-                                {% for button in template_buttons %}
-                                    {% include 'bluedata_templates/widgets/icon_button.html' with btn=button %}
-                                {% endfor %}
-
-                                {% if template_btn_save %}
-                                    <div class="btn-group">
-                                        <button type="submit" class="btn btn-primary font-weight-bolder">
-                                            <i class="la la-check"></i>
-                                            Salvar
-                                        </button>
-                                        {% if template_url_delete or template_url_active %}
-                                            <button type="submit" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
-                                                <span class="sr-only">Toggle Dropdown</span>
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
-                                                <!--btn::Excluir-->
-                                                {% if template_url_delete %}
-                                                    <a href="{{ template_url_delete }}" class="btn btn-link text-dark-50">
-                                                        <i class="la la-times"></i>
-                                                        Excluir
-                                                    </a>
-                                                {% endif %}
-
-                                                <!--btn::Ativar/Desativar-->
-                                                {% if template_url_active %}
-                                                    <a href="{{ template_url_active }}" class="btn btn-link text-dark-50">
-                                                        {% if object.is_active %}
-                                                            <i class="la la-toggle-off"></i> Desativar
-                                                        {% else %}
-                                                            <i class="la la-toggle-on"></i> Ativar
-                                                        {% endif %}
-                                                    </a>
-                                                {% endif %}
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            {% include template_form_fields %}
-                        </div>
-                    </div>
-                    <!--end::Card-->
+    <!--begin::Form-->
+    <form class="form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card card-custom">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">
+                        {{ template_title }}
+                        {% if template_subtitle %}
+                            <small class="text-primary ml-2">{{ template_subtitle|lower }}</small>
+                        {% endif %}
+                    </h3>
                 </div>
-                <!--end::Container-->
+                <div class="card-toolbar">
+                    {% for button in template_buttons %}
+                        {% include 'bluedata_templates/widgets/icon_button.html' with btn=button %}
+                    {% endfor %}
+
+                    {% if template_btn_save %}
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary font-weight-bolder">
+                                <i class="la la-check"></i>
+                                Salvar
+                            </button>
+                            {% if template_url_delete or template_url_active %}
+                                <button type="submit" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+                                    <!--btn::Excluir-->
+                                    {% if template_url_delete %}
+                                        <a href="{{ template_url_delete }}" class="btn btn-link text-dark-50">
+                                            <i class="la la-times"></i>
+                                            Excluir
+                                        </a>
+                                    {% endif %}
+
+                                    <!--btn::Ativar/Desativar-->
+                                    {% if template_url_active %}
+                                        <a href="{{ template_url_active }}" class="btn btn-link text-dark-50">
+                                            {% if object.is_active %}
+                                                <i class="la la-toggle-off"></i> Desativar
+                                            {% else %}
+                                                <i class="la la-toggle-on"></i> Ativar
+                                            {% endif %}
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
             </div>
-        </form>
-        <!--end::Form-->
-    </div>
+            <div class="card-body">
+                {% include template_form_fields %}
+            </div>
+        </div>
+    </form>
+    <!--end::Form-->
 
     {% block sub_content %} {% endblock %}
 

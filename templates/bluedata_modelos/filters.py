@@ -10,13 +10,13 @@
 #     class Meta:
 #         model = [model_name]
 #         fields = {
-#             'descricao': ['icontains'],
+#             'titulo': ['icontains'],
 #         }
 #
 #     # label do filtro no template
 #     def __init__(self, *args, **kwargs):
 #         super([model_name]Filter, self).__init__(*args, **kwargs)
-#         self.filters['descricao__icontains'].label = "Descrição"
+#         self.filters['titulo__icontains'].label = "Título"
 #
 #     # ordena a lista filtrada
 #     def order_by(self, queryset, name, value):

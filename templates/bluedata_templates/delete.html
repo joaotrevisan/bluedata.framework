@@ -3,48 +3,37 @@
 
 {% block content %}
 
-    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-        <!--begin::Form-->
-        <form class="form" method="post" id="kt_form">
-            {% csrf_token %}
-            <div class="d-flex flex-column-fluid mt-6 mt-lg-8">
-                <!--begin::Container-->
-                <div class="container">
-                    <!--begin::Card-->
-                    <div class="card card-custom card-sticky" id="kt_page_sticky_card">
-                        <div class="card-header" style="">
-                            <div class="card-title">
-                                <h3 class="card-label">
-                                    {{ template_title }}
-                                    <i class="mr-2"></i>
-                                    {% if template_subtitle %}
-                                        <small class="text-primary">{{ template_subtitle|lower }}</small>
-                                    {% endif %}
-                                </h3>
-                            </div>
-                            <div class="card-toolbar">
-                                {% for button in template_buttons %}
-                                    {% include 'bluedata_templates/widgets/icon_button.html' with btn=button %}
-                                {% endfor %}
-
-                                <button type="submit" class="btn btn-primary font-weight-bolder">
-                                    <i class="la la-times"></i>
-                                    Excluir
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <p>Utilize o botão 'Excluir' para remover o registro.</p>
-                            <p class="text-muted"><em>Essa operação não pode ser desfeita.</em></p>
-                        </div>
-                    </div>
-                    <!--end::Card-->
+    <!--begin::Form-->
+    <form class="form" method="post">
+        {% csrf_token %}
+        <div class="card card-custom">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">
+                        {{ template_title }}
+                        {% if template_subtitle %}
+                            <small class="text-primary ml-2">{{ template_subtitle|lower }}</small>
+                        {% endif %}
+                    </h3>
                 </div>
-                <!--end::Container-->
+                <div class="card-toolbar">
+                    {% for button in template_buttons %}
+                        {% include 'bluedata_templates/widgets/icon_button.html' with btn=button %}
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-primary font-weight-bolder">
+                        <i class="la la-times"></i>
+                        Excluir
+                    </button>
+                </div>
             </div>
-        </form>
-        <!--end::Form-->
-    </div>
+            <div class="card-body">
+                <p>Utilize o botão 'Excluir' para remover o registro.</p>
+                <p class="text-muted"><em>Essa operação não pode ser desfeita.</em></p>
+            </div>
+        </div>
+    </form>
+    <!--end::Form-->
 
     {% block sub_content %} {% endblock %}
 

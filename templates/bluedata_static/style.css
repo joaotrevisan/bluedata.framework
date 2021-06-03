@@ -2,7 +2,14 @@
 .custom-fixed-table-header { position: sticky; top: 0; background-color: #242939; color: white; min-width: 70px; }
 
 /* restringe o tamanho máximo */
-.custom-wrap-max-height { overflow-y: auto; max-height: 445px !important }
+.custom-wrap-max-height { overflow-y: auto; max-height: 450px !important }
+
+/* impede o wrap da tabela */
+#kt_table th, tr { white-space: nowrap; }
+
+/* aplica canto redondo na tabela */
+#kt_table th:first-child { border-radius:5px 0 0 0; }
+#kt_table th:last-child { border-radius:0 5px 0 0; }
 
 /* campos obrigatórios em negrito */
 .bold { font-weight: bold; }
@@ -10,8 +17,3 @@
 
 /* text-muted para a ser text-dark-50 */
 .text-muted { color: #7E8299 !important }
-
-/* remove espaçamento no topo */
-.header-fixed .wrapper {
-    padding-top: 0px !important
-}

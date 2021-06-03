@@ -32,11 +32,11 @@ def get_unique_slug(self, model_base):
     # verifica se o slug é o mesmo do banco
     obj = model.objects.filter(id=self.id).last()
     if obj:
-        if obj.descricao.upper() == self.descricao.upper():
+        if obj.titulo.upper() == self.titulo.upper():
             return self.slug
 
     # preenche o novo slug
-    str_to_slug = remover_acentos(self.descricao)
+    str_to_slug = remover_acentos(self.titulo)
     unique_slug = slugify(str_to_slug)
     num = 1
     while model.objects.filter(slug=unique_slug).exists():

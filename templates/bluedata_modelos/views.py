@@ -13,8 +13,8 @@
 #     base_url = '[base_url]'
 #     template_title = 'Lista de [model_name]s'
 #     fields = [
-#         {'field': 'id', 'type': 'IntegerField', 'verbose': '#'},
-#         {'field': 'descricao', 'type': 'CharField', 'verbose': 'Descrição'},
+#         {'field': 'id', 'type': 'CharField', 'verbose': '#'},
+#         {'field': 'titulo', 'type': 'CharField', 'verbose': 'Título'},
 #         {'field': 'is_active', 'type': 'BooleanField', 'verbose': 'Ativo?'},
 #     ]
 #

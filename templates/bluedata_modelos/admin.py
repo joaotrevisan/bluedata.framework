@@ -4,9 +4,9 @@
 #
 #
 # class [model_name]Admin(admin.ModelAdmin):
-#     list_display = ('descricao', 'is_active')
+#     list_display = ('titulo', 'is_active')
 #     list_filter = ('is_active', )
-#     search_fields = ['descricao']
+#     search_fields = ['titulo']
 #
 #
 # admin.site.register([model_name], [model_name]Admin)
