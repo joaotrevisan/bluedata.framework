@@ -1,10 +1,17 @@
+{% load core_tags %}
+
+
+<!--Atalhos-->
 <li class="menu-section">
-    <h4 class="menu-text">Acessos</h4>
+    <h4 class="menu-text">Atalhos</h4>
     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 </li>
+
 <!--menu::Início-->
-<li class="menu-item menu-item-active" aria-haspopup="true">
-    <a href="index.html" class="menu-link">
+{% tag_menu_active 'Dashboard' 'Dashboard' as menu %}
+
+<li class="menu-item menu-item-submenu {{ menu|safe }}" aria-haspopup="true">
+    <a href="{% url 'dashboard' %}" class="menu-link">
         <span class="svg-icon menu-icon">
             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -27,65 +34,118 @@
         <span class="menu-text">Início</span>
     </a>
 </li>
-<!--menu::Chamados-->
-<li class="menu-item menu-item-submenu" aria-haspopup="true">
-    <a href="index.html" class="menu-link">
-        <span class="svg-icon menu-icon">
-            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo1/dist/../src/media/svg/icons/Communication/Flag.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <rect x="0" y="0" width="24" height="24"/>
-                    <path d="M3.5,3 L5,3 L5,19.5 C5,20.3284271 4.32842712,21 3.5,21 L3.5,21 C2.67157288,21 2,20.3284271 2,19.5 L2,4.5 C2,3.67157288 2.67157288,3 3.5,3 Z" fill="#000000"/>
-                    <path d="M6.99987583,2.99995344 L19.754647,2.99999303 C20.3069317,2.99999474 20.7546456,3.44771138 20.7546439,3.99999613 C20.7546431,4.24703684 20.6631995,4.48533385 20.497938,4.66895776 L17.5,8 L20.4979317,11.3310353 C20.8673908,11.7415453 20.8341123,12.3738351 20.4236023,12.7432941 C20.2399776,12.9085564 20.0016794,13 19.7546376,13 L6.99987583,13 L6.99987583,2.99995344 Z" fill="#000000" opacity="0.3"/>
-                </g>
-            </svg><!--end::Svg Icon-->
-        </span>
-        <span class="menu-text">Chamados</span>
-    </a>
-</li>
+
 <!--menu::Arquivos-->
-<li class="menu-item menu-item-submenu" aria-haspopup="true">
-    <a href="index.html" class="menu-link">
-        <span class="svg-icon menu-icon">
-            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo1/dist/../src/media/svg/icons/Files/Folder-cloud.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <rect x="0" y="0" width="24" height="24"/>
-                    <path d="M3.5,21 L20.5,21 C21.3284271,21 22,20.3284271 22,19.5 L22,8.5 C22,7.67157288 21.3284271,7 20.5,7 L10,7 L7.43933983,4.43933983 C7.15803526,4.15803526 6.77650439,4 6.37867966,4 L3.5,4 C2.67157288,4 2,4.67157288 2,5.5 L2,19.5 C2,20.3284271 2.67157288,21 3.5,21 Z" fill="#000000" opacity="0.3"/>
-                    <path d="M8.63657261,16.4632487 C7.65328954,15.8436137 7,14.7480988 7,13.5 C7,11.5670034 8.56700338,10 10.5,10 C12.263236,10 13.7219407,11.3038529 13.9645556,13 L15,13 C16.1045695,13 17,13.8954305 17,15 C17,16.1045695 16.1045695,17 15,17 L10,17 C9.47310652,17 8.99380073,16.7962529 8.63657261,16.4632487 Z" fill="#000000"/>
-                </g>
-            </svg><!--end::Svg Icon-->
-        </span>
-        <span class="menu-text">Arquivos</span>
-    </a>
-</li>
+{% tag_menu_active 'Atalhos' 'MeusArquivos' as menu %}
+{% tag_acesso_menu user 'Atalhos' 'MeusArquivos' as acesso_ok %}
+
+{% if acesso_ok %}
+    <li class="menu-item menu-item-submenu {{ menu|safe }}" aria-haspopup="true">
+        <a href="{% url 'meus_arquivos' %}" class="menu-link">
+            <span class="svg-icon menu-icon">
+                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo3/dist/../src/media/svg/icons/Files/File.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <polygon points="0 0 24 0 24 24 0 24"/>
+                        <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                        <rect fill="#000000" x="6" y="11" width="9" height="2" rx="1"/>
+                        <rect fill="#000000" x="6" y="15" width="5" height="2" rx="1"/>
+                    </g>
+                </svg><!--end::Svg Icon-->
+            </span>
+            <span class="menu-text">Arquivos</span>
+        </a>
+    </li>
+{% endif %}
+
+<!--menu::Publicações-->
+{% tag_menu_active 'Atalhos' 'MinhasPublicacoes' as menu %}
+{% tag_acesso_menu user 'Atalhos' 'MinhasPublicacoes' as acesso_ok %}
+
+{% if acesso_ok %}
+    <li class="menu-item menu-item-submenu {{ menu|safe }}" aria-haspopup="true">
+        <a href="{% url 'minha_publicacoes' %}" class="menu-link">
+            <span class="svg-icon menu-icon">
+                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo3/dist/../src/media/svg/icons/Files/Selected-file.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <polygon points="0 0 24 0 24 24 0 24"/>
+                        <path d="M4.85714286,1 L11.7364114,1 C12.0910962,1 12.4343066,1.12568431 12.7051108,1.35473959 L17.4686994,5.3839416 C17.8056532,5.66894833 18,6.08787823 18,6.52920201 L18,19.0833333 C18,20.8738751 17.9795521,21 16.1428571,21 L4.85714286,21 C3.02044787,21 3,20.8738751 3,19.0833333 L3,2.91666667 C3,1.12612489 3.02044787,1 4.85714286,1 Z M8,12 C7.44771525,12 7,12.4477153 7,13 C7,13.5522847 7.44771525,14 8,14 L15,14 C15.5522847,14 16,13.5522847 16,13 C16,12.4477153 15.5522847,12 15,12 L8,12 Z M8,16 C7.44771525,16 7,16.4477153 7,17 C7,17.5522847 7.44771525,18 8,18 L11,18 C11.5522847,18 12,17.5522847 12,17 C12,16.4477153 11.5522847,16 11,16 L8,16 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                        <path d="M6.85714286,3 L14.7364114,3 C15.0910962,3 15.4343066,3.12568431 15.7051108,3.35473959 L20.4686994,7.3839416 C20.8056532,7.66894833 21,8.08787823 21,8.52920201 L21,21.0833333 C21,22.8738751 20.9795521,23 19.1428571,23 L6.85714286,23 C5.02044787,23 5,22.8738751 5,21.0833333 L5,4.91666667 C5,3.12612489 5.02044787,3 6.85714286,3 Z M8,12 C7.44771525,12 7,12.4477153 7,13 C7,13.5522847 7.44771525,14 8,14 L15,14 C15.5522847,14 16,13.5522847 16,13 C16,12.4477153 15.5522847,12 15,12 L8,12 Z M8,16 C7.44771525,16 7,16.4477153 7,17 C7,17.5522847 7.44771525,18 8,18 L11,18 C11.5522847,18 12,17.5522847 12,17 C12,16.4477153 11.5522847,16 11,16 L8,16 Z" fill="#000000" fill-rule="nonzero"/>
+                    </g>
+                </svg><!--end::Svg Icon-->
+            </span>
+            <span class="menu-text">Publicações</span>
+        </a>
+    </li>
+{% endif %}
+
 <!--menu::Benchmarking-->
-<li class="menu-item menu-item-submenu" aria-haspopup="true">
-    <a href="index.html" class="menu-link">
-        <span class="svg-icon menu-icon">
-            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo1/dist/../src/media/svg/icons/Shopping/Chart-bar1.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <rect x="0" y="0" width="24" height="24"/>
-                    <rect fill="#000000" opacity="0.3" x="12" y="4" width="3" height="13" rx="1.5"/>
-                    <rect fill="#000000" opacity="0.3" x="7" y="9" width="3" height="8" rx="1.5"/>
-                    <path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero"/>
-                    <rect fill="#000000" opacity="0.3" x="17" y="11" width="3" height="6" rx="1.5"/>
-                </g>
-            </svg><!--end::Svg Icon-->
-        </span>
-        <span class="menu-text">Benchmarking</span>
-    </a>
-</li>
-<!--menu::Videos Tutoriais-->
-<li class="menu-item menu-item-submenu" aria-haspopup="true">
-    <a href="index.html" class="menu-link">
-        <span class="svg-icon menu-icon">
-            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo1/dist/../src/media/svg/icons/Media/Youtube.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <rect x="0" y="0" width="24" height="24"/>
-                    <path d="M4.22266882,4 L19.8367728,4.00001353 C21.3873185,4.00001353 22.6823897,5.1816009 22.8241881,6.72564925 C22.9414021,8.00199653 23.0000091,9.40113909 23.0000091,10.9230769 C23.0000091,12.7049599 22.9196724,14.4870542 22.758999,16.26936 L22.7589943,16.2693595 C22.6196053,17.8155637 21.3235899,19 19.7711155,19 L4.22267091,19.0000022 C2.6743525,19.0000022 1.38037032,17.8217109 1.23577882,16.2801587 C1.07859294,14.6043323 1,13.0109461 1,11.5 C1,9.98905359 1.07859298,8.39566699 1.23577893,6.7198402 L1.23578022,6.71984032 C1.38037157,5.17828994 2.67435224,4 4.22266882,4 Z" fill="#000000" opacity="0.3"/>
-                    <path d="M11.1821576,14.8052934 L15.5856084,11.7952868 C15.8135802,11.6394552 15.8720614,11.3283211 15.7162299,11.1003494 C15.6814583,11.0494808 15.6375838,11.0054775 15.5868174,10.970557 L11.1833666,7.94156929 C10.9558527,7.78507001 10.6445485,7.84263875 10.4880492,8.07015268 C10.4307018,8.15352258 10.3999996,8.25233045 10.3999996,8.35351969 L10.3999996,14.392514 C10.3999996,14.6686564 10.6238572,14.892514 10.8999996,14.892514 C11.000689,14.892514 11.0990326,14.8621141 11.1821576,14.8052934 Z" fill="#000000"/>
-                </g>
-            </svg><!--end::Svg Icon-->
-        </span>
-        <span class="menu-text">Videos Tutoriais</span>
-    </a>
-</li>
+{% tag_menu_active 'Atalhos' 'MeuBenchmarking' as menu %}
+{% tag_acesso_menu user 'Atalhos' 'MeuBenchmarking' as acesso_ok %}
+
+{% if acesso_ok %}
+    <li class="menu-item menu-item-submenu {{ menu|safe }}" aria-haspopup="true">
+        <a href="{% url 'meu_benchmarking' %}" class="menu-link">
+            <span class="svg-icon menu-icon">
+                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo1/dist/../src/media/svg/icons/Shopping/Chart-bar1.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24"/>
+                        <rect fill="#000000" opacity="0.3" x="12" y="4" width="3" height="13" rx="1.5"/>
+                        <rect fill="#000000" opacity="0.3" x="7" y="9" width="3" height="8" rx="1.5"/>
+                        <path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero"/>
+                        <rect fill="#000000" opacity="0.3" x="17" y="11" width="3" height="6" rx="1.5"/>
+                    </g>
+                </svg><!--end::Svg Icon-->
+            </span>
+            <span class="menu-text">Benchmarking</span>
+        </a>
+    </li>
+{% endif %}
+
+<!--menu::Boletim da Qualidade-->
+{% tag_menu_active 'Atalhos' 'MeuBoletim' as menu %}
+{% tag_acesso_menu user 'Atalhos' 'MeuBoletim' as acesso_ok %}
+
+{% if acesso_ok %}
+    <li class="menu-item menu-item-submenu {{ menu|safe }}" aria-haspopup="true">
+        <a href="{% url 'meu_boletim' %}" class="menu-link">
+            <span class="svg-icon menu-icon">
+                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo3/dist/../src/media/svg/icons/Communication/Clipboard-list.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24"/>
+                        <path d="M8,3 L8,3.5 C8,4.32842712 8.67157288,5 9.5,5 L14.5,5 C15.3284271,5 16,4.32842712 16,3.5 L16,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,21 C20,22.1045695 19.1045695,23 18,23 L6,23 C4.8954305,23 4,22.1045695 4,21 L4,5 C4,3.8954305 4.8954305,3 6,3 L8,3 Z" fill="#000000" opacity="0.3"/>
+                        <path d="M11,2 C11,1.44771525 11.4477153,1 12,1 C12.5522847,1 13,1.44771525 13,2 L14.5,2 C14.7761424,2 15,2.22385763 15,2.5 L15,3.5 C15,3.77614237 14.7761424,4 14.5,4 L9.5,4 C9.22385763,4 9,3.77614237 9,3.5 L9,2.5 C9,2.22385763 9.22385763,2 9.5,2 L11,2 Z" fill="#000000"/>
+                        <rect fill="#000000" opacity="0.3" x="10" y="9" width="7" height="2" rx="1"/>
+                        <rect fill="#000000" opacity="0.3" x="7" y="9" width="2" height="2" rx="1"/>
+                        <rect fill="#000000" opacity="0.3" x="7" y="13" width="2" height="2" rx="1"/>
+                        <rect fill="#000000" opacity="0.3" x="10" y="13" width="7" height="2" rx="1"/>
+                        <rect fill="#000000" opacity="0.3" x="7" y="17" width="2" height="2" rx="1"/>
+                        <rect fill="#000000" opacity="0.3" x="10" y="17" width="7" height="2" rx="1"/>
+                    </g>
+                </svg><!--end::Svg Icon-->
+            </span>
+            <span class="menu-text">Boletim da Qualidade</span>
+        </a>
+    </li>
+{% endif %}
+
+<!--menu::Extração de Dados-->
+{% tag_menu_active 'Atalhos' 'ExtracaoDados' as menu %}
+{% tag_acesso_menu user 'Atalhos' 'ExtracaoDados' as acesso_ok %}
+
+{% if acesso_ok %}
+    <li class="menu-item menu-item-submenu {{ menu|safe }}" aria-haspopup="true">
+        <a href="{% url 'exportacao_cliente' %}" class="menu-link">
+            <span class="svg-icon menu-icon">
+                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo3/dist/../src/media/svg/icons/Files/Export.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24"/>
+                        <path d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                        <rect fill="#000000" opacity="0.3" transform="translate(12.000000, 8.000000) scale(1, -1) rotate(-180.000000) translate(-12.000000, -8.000000) " x="11" y="2" width="2" height="12" rx="1"/>
+                        <path d="M12,2.58578644 L14.2928932,0.292893219 C14.6834175,-0.0976310729 15.3165825,-0.0976310729 15.7071068,0.292893219 C16.0976311,0.683417511 16.0976311,1.31658249 15.7071068,1.70710678 L12.7071068,4.70710678 C12.3165825,5.09763107 11.6834175,5.09763107 11.2928932,4.70710678 L8.29289322,1.70710678 C7.90236893,1.31658249 7.90236893,0.683417511 8.29289322,0.292893219 C8.68341751,-0.0976310729 9.31658249,-0.0976310729 9.70710678,0.292893219 L12,2.58578644 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000000, 2.500000) scale(1, -1) translate(-12.000000, -2.500000) "/>
+                    </g>
+                </svg><!--end::Svg Icon-->
+            </span>
+            <span class="menu-text">Extração de Dados</span>
+        </a>
+    </li>
+{% endif %}

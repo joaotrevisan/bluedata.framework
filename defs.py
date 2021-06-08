@@ -1,11 +1,23 @@
 from django.contrib import messages
+from django.contrib.auth import logout
+from django.http import HttpResponseRedirect
 
+from apps.core.defs import is_valid_user
 from bluedata.helpers import reverse_url
 
 
 # Seta o contexto do List
 #
-def set_context_list(context, url, title):
+def set_context_list(context, self):
+    # Variables
+    url = self.base_url
+    title = self.template_title
+
+    # Set menu on session
+    self.request.session['menu'] = self.access['menu']
+    self.request.session['item'] = self.access['item']
+
+    # Templates
     context['template'] = 'keen.html'
     context['template_title'] = title
     context['template_subtitle'] = 'listar'
@@ -20,8 +32,17 @@ def set_context_list(context, url, title):
 
 # Seta o contexto do Create
 #
-def set_context_create(context, self, url, title):
+def set_context_create(context, self):
+    # Variables
+    url = self.base_url
+    title = self.template_title
+
+    # Set session and menu
+    self.request.session['menu'] = self.access['menu']
+    self.request.session['item'] = self.access['item']
     self.request.session['uuid'] = None
+
+    # Templates
     context['template'] = 'keen.html'
     context['template_title'] = title
     context['template_subtitle'] = 'adicionar'
@@ -34,8 +55,17 @@ def set_context_create(context, self, url, title):
 
 # Seta o contexto do Update
 #
-def set_context_update(context, self, url, title):
+def set_context_update(context, self):
+    # Variables
+    url = self.base_url
+    title = self.template_title
+
+    # Set session and menu
+    self.request.session['menu'] = self.access['menu']
+    self.request.session['item'] = self.access['item']
     self.request.session['uuid'] = str(self.object.id)
+
+    # Templates
     context['template'] = 'keen.html'
     context['template_title'] = title
     context['template_subtitle'] = 'alterar'
@@ -50,13 +80,39 @@ def set_context_update(context, self, url, title):
 
 # Seta o contexto do Delete
 #
-def set_context_delete(context, self, url, title):
+def set_context_delete(context, self):
+    # Variables
+    url = self.base_url
+    title = self.template_title
+
+    # Set session and menu
+    self.request.session['menu'] = self.access['menu']
+    self.request.session['item'] = self.access['item']
+
+    # Templates
     context['template'] = 'keen.html'
     context['template_title'] = title
     context['template_subtitle'] = 'excluir'
 
     btn_back = set_button('Voltar', reverse_url('{}_update'.format(url), [str(self.object.id)]), 'btn-outline-secondary', 'la la-angle-left')
     context['template_buttons'] = [btn_back]
+
+
+# Metodo get da BaseActiveView
+#
+def get_base_active_view(self, kwargs):
+    # Set session and menu
+    self.request.session['menu'] = self.access['menu']
+    self.request.session['item'] = self.access['item']
+
+    # Check permission
+    if not is_valid_user(self.request.user, self.access):
+        logout(self.request)
+        return HttpResponseRedirect(reverse_url('account_login'))
+
+    msg = toggle_active(self.model.objects.get(id=kwargs['pk']))
+    set_message(self, msg)
+    return HttpResponseRedirect(reverse_url('{}_list'.format(self.base_url)))
 
 
 # Dado um modelo modifica o status is_active
@@ -82,6 +138,3 @@ def set_message(self, msg):
 #
 def set_button(title, url, color, icon):
     return {'title': title, 'url': url, 'color': color, 'icon': icon}
-
-
-

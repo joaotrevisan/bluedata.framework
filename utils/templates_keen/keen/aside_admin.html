@@ -1,9 +1,16 @@
+{% load core_tags %}
+
+
+<!--Cadastros-->
 <li class="menu-section">
     <h4 class="menu-text">Cadastros</h4>
     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 </li>
+
 <!--menu::Acessos-->
-<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+{% tag_menu_open 'Acessos' as menu %}
+
+<li class="menu-item menu-item-submenu {{ menu|safe }}" aria-haspopup="true" data-menu-toggle="hover">
     <a href="javascript:;" class="menu-link menu-toggle">
         <span class="svg-icon menu-icon">
             <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo1/dist/../src/media/svg/icons/Communication/Group.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -25,416 +32,576 @@
                     <span class="menu-text">Acessos</span>
                 </span>
             </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/aside-light.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Usinas</span>
-                </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/aside-light.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Grupos</span>
-                </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/header-dark.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Usuários</span>
-                </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/header-dark.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Equipes</span>
-                </a>
-            </li>
+
+            <!--submenu::Agrupador-->
+            {% tag_menu_active 'Acessos' 'AgrupadorUnidade' as i_AgrupadorUnidade %}
+            {% tag_acesso_menu user 'Acessos' 'AgrupadorUnidade' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_AgrupadorUnidade|safe }}" aria-haspopup="true">
+                    <a href="{% url 'agrupador_unidade_list' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Agrupador</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <!--submenu::Unidades-->
+            {% tag_menu_active 'Acessos' 'Unidades' as i_Unidades %}
+            {% tag_acesso_menu user 'Acessos' 'Unidades' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_Unidades|safe }}" aria-haspopup="true">
+                    <a href="{% url 'unidade_list' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Unidades</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <!--submenu::Grupos-->
+            {% tag_menu_active 'Acessos' 'Grupos' as i_Grupos %}
+            {% tag_acesso_menu user 'Acessos' 'Grupos' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_Grupos|safe }}" aria-haspopup="true">
+                    <a href="{% url 'grupo_list' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Grupos</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <!--submenu::Polos-->
+            {% tag_menu_active 'Acessos' 'Polos' as i_Polos %}
+            {% tag_acesso_menu user 'Acessos' 'Polos' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_Polos|safe }}" aria-haspopup="true">
+                    <a href="{% url 'polo_list' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Polos</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <!--submenu::Acessos-->
+            {% tag_menu_active 'Acessos' 'Acessos' as i_Acessos %}
+            {% tag_acesso_menu user 'Acessos' 'Acessos' as acesso_ok %}
+
+            {% if acesso_ok and user.perfil == 'BENRI_ADMIN' %}
+                <li class="menu-item {{ i_Acessos|safe }}" aria-haspopup="true">
+                    <a href="{% url 'acesso_list' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Acessos</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <!--submenu::Usuarios-->
+            {% tag_menu_active 'Acessos' 'Usuarios' as i_Usuarios %}
+            {% tag_acesso_menu user 'Acessos' 'Usuarios' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_Usuarios|safe }}" aria-haspopup="true">
+                    <a href="{% url 'usuario_list' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Usuarios</span>
+                    </a>
+                </li>
+            {% endif %}
         </ul>
     </div>
-</li>
-<!--menu::Chamados-->
-<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-    <a href="javascript:;" class="menu-link menu-toggle">
-        <span class="svg-icon menu-icon">
-            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo1/dist/../src/media/svg/icons/Communication/Flag.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <rect x="0" y="0" width="24" height="24"/>
-                    <path d="M3.5,3 L5,3 L5,19.5 C5,20.3284271 4.32842712,21 3.5,21 L3.5,21 C2.67157288,21 2,20.3284271 2,19.5 L2,4.5 C2,3.67157288 2.67157288,3 3.5,3 Z" fill="#000000"/>
-                    <path d="M6.99987583,2.99995344 L19.754647,2.99999303 C20.3069317,2.99999474 20.7546456,3.44771138 20.7546439,3.99999613 C20.7546431,4.24703684 20.6631995,4.48533385 20.497938,4.66895776 L17.5,8 L20.4979317,11.3310353 C20.8673908,11.7415453 20.8341123,12.3738351 20.4236023,12.7432941 C20.2399776,12.9085564 20.0016794,13 19.7546376,13 L6.99987583,13 L6.99987583,2.99995344 Z" fill="#000000" opacity="0.3"/>
-                </g>
-            </svg><!--end::Svg Icon-->
-        </span>
-        <span class="menu-text">Chamados</span>
-        <i class="menu-arrow"></i>
-    </a>
-    <div class="menu-submenu">
-        <i class="menu-arrow"></i>
-        <ul class="menu-subnav">
-            <li class="menu-item menu-item-parent" aria-haspopup="true">
-                <span class="menu-link">
-                    <span class="menu-text">Chamados</span>
-                </span>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/aside-light.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Rotas</span>
-                </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/aside-light.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Chamados</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</li>
-<!--menu::Soluções-->
-<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-    <a href="javascript:;" class="menu-link menu-toggle">
-        <span class="svg-icon menu-icon">
-            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo1/dist/../src/media/svg/icons/Communication/Dial-numbers.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <rect x="0" y="0" width="24" height="24"/>
-                    <rect fill="#000000" opacity="0.3" x="4" y="4" width="4" height="4" rx="2"/>
-                    <rect fill="#000000" x="4" y="10" width="4" height="4" rx="2"/>
-                    <rect fill="#000000" x="10" y="4" width="4" height="4" rx="2"/>
-                    <rect fill="#000000" x="10" y="10" width="4" height="4" rx="2"/>
-                    <rect fill="#000000" x="16" y="4" width="4" height="4" rx="2"/>
-                    <rect fill="#000000" x="16" y="10" width="4" height="4" rx="2"/>
-                    <rect fill="#000000" x="4" y="16" width="4" height="4" rx="2"/>
-                    <rect fill="#000000" x="10" y="16" width="4" height="4" rx="2"/>
-                    <rect fill="#000000" x="16" y="16" width="4" height="4" rx="2"/>
-                </g>
-            </svg><!--end::Svg Icon-->
-        </span>
-        <span class="menu-text">Soluções</span>
-        <i class="menu-arrow"></i>
-    </a>
-    <div class="menu-submenu">
-        <i class="menu-arrow"></i>
-        <ul class="menu-subnav">
-            <li class="menu-item menu-item-parent" aria-haspopup="true">
-                <span class="menu-link">
-                    <span class="menu-text">Soluções</span>
-                </span>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/aside-light.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Soluções</span>
-                </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/aside-light.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Categorias</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</li>
-<!--menu::Faqs-->
-<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-    <a href="javascript:;" class="menu-link menu-toggle">
-        <span class="svg-icon menu-icon">
-            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo1/dist/../src/media/svg/icons/Communication/Chat6.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <rect x="0" y="0" width="24" height="24"/>
-                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M14.4862 18L12.7975 21.0566C12.5304 21.54 11.922 21.7153 11.4386 21.4483C11.2977 21.3704 11.1777 21.2597 11.0887 21.1255L9.01653 18H5C3.34315 18 2 16.6569 2 15V6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H14.4862Z" fill="black"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M6 7H15C15.5523 7 16 7.44772 16 8C16 8.55228 15.5523 9 15 9H6C5.44772 9 5 8.55228 5 8C5 7.44772 5.44772 7 6 7ZM6 11H11C11.5523 11 12 11.4477 12 12C12 12.5523 11.5523 13 11 13H6C5.44772 13 5 12.5523 5 12C5 11.4477 5.44772 11 6 11Z" fill="black"/>
-                </g>
-            </svg><!--end::Svg Icon-->
-        </span>
-        <span class="menu-text">FAQs</span>
-        <i class="menu-arrow"></i>
-    </a>
-    <div class="menu-submenu">
-        <i class="menu-arrow"></i>
-        <ul class="menu-subnav">
-            <li class="menu-item menu-item-parent" aria-haspopup="true">
-                <span class="menu-link">
-                    <span class="menu-text">FAQs</span>
-                </span>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/aside-light.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Grupos</span>
-                </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/aside-light.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">FAQs</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</li>
-<!--menu::Divulgação-->
-<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-    <a href="javascript:;" class="menu-link menu-toggle">
-        <span class="svg-icon menu-icon">
-            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo1/dist/../src/media/svg/icons/Communication/Group-chat.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <rect x="0" y="0" width="24" height="24"/>
-                    <path d="M16,15.6315789 L16,12 C16,10.3431458 14.6568542,9 13,9 L6.16183229,9 L6.16183229,5.52631579 C6.16183229,4.13107011 7.29290239,3 8.68814808,3 L20.4776218,3 C21.8728674,3 23.0039375,4.13107011 23.0039375,5.52631579 L23.0039375,13.1052632 L23.0206157,17.786793 C23.0215995,18.0629336 22.7985408,18.2875874 22.5224001,18.2885711 C22.3891754,18.2890457 22.2612702,18.2363324 22.1670655,18.1421277 L19.6565168,15.6315789 L16,15.6315789 Z" fill="#000000"/>
-                    <path d="M1.98505595,18 L1.98505595,13 C1.98505595,11.8954305 2.88048645,11 3.98505595,11 L11.9850559,11 C13.0896254,11 13.9850559,11.8954305 13.9850559,13 L13.9850559,18 C13.9850559,19.1045695 13.0896254,20 11.9850559,20 L4.10078614,20 L2.85693427,21.1905292 C2.65744295,21.3814685 2.34093638,21.3745358 2.14999706,21.1750444 C2.06092565,21.0819836 2.01120804,20.958136 2.01120804,20.8293182 L2.01120804,18.32426 C1.99400175,18.2187196 1.98505595,18.1104045 1.98505595,18 Z M6.5,14 C6.22385763,14 6,14.2238576 6,14.5 C6,14.7761424 6.22385763,15 6.5,15 L11.5,15 C11.7761424,15 12,14.7761424 12,14.5 C12,14.2238576 11.7761424,14 11.5,14 L6.5,14 Z M9.5,16 C9.22385763,16 9,16.2238576 9,16.5 C9,16.7761424 9.22385763,17 9.5,17 L11.5,17 C11.7761424,17 12,16.7761424 12,16.5 C12,16.2238576 11.7761424,16 11.5,16 L9.5,16 Z" fill="#000000" opacity="0.3"/>
-                </g>
-            </svg><!--end::Svg Icon-->
-        </span>
-        <span class="menu-text">Divulgação</span>
-        <i class="menu-arrow"></i>
-    </a>
-    <div class="menu-submenu">
-        <i class="menu-arrow"></i>
-        <ul class="menu-subnav">
-            <li class="menu-item menu-item-parent" aria-haspopup="true">
-                <span class="menu-link">
-                    <span class="menu-text">Divulgação</span>
-                </span>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/aside-light.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Eventos</span>
-                </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/aside-light.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Portal FT</span>
-                </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/aside-light.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Mensagens</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</li>
-<!--menu::Históricos-->
-<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-    <a href="javascript:;" class="menu-link menu-toggle">
-        <span class="svg-icon menu-icon">
-            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo1/dist/../src/media/svg/icons/Home/Commode2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <rect x="0" y="0" width="24" height="24"/>
-                    <path d="M5.5,2 L18.5,2 C19.3284271,2 20,2.67157288 20,3.5 L20,6.5 C20,7.32842712 19.3284271,8 18.5,8 L5.5,8 C4.67157288,8 4,7.32842712 4,6.5 L4,3.5 C4,2.67157288 4.67157288,2 5.5,2 Z M11,4 C10.4477153,4 10,4.44771525 10,5 C10,5.55228475 10.4477153,6 11,6 L13,6 C13.5522847,6 14,5.55228475 14,5 C14,4.44771525 13.5522847,4 13,4 L11,4 Z" fill="#000000" opacity="0.3"/>
-                    <path d="M5.5,9 L18.5,9 C19.3284271,9 20,9.67157288 20,10.5 L20,13.5 C20,14.3284271 19.3284271,15 18.5,15 L5.5,15 C4.67157288,15 4,14.3284271 4,13.5 L4,10.5 C4,9.67157288 4.67157288,9 5.5,9 Z M11,11 C10.4477153,11 10,11.4477153 10,12 C10,12.5522847 10.4477153,13 11,13 L13,13 C13.5522847,13 14,12.5522847 14,12 C14,11.4477153 13.5522847,11 13,11 L11,11 Z M5.5,16 L18.5,16 C19.3284271,16 20,16.6715729 20,17.5 L20,20.5 C20,21.3284271 19.3284271,22 18.5,22 L5.5,22 C4.67157288,22 4,21.3284271 4,20.5 L4,17.5 C4,16.6715729 4.67157288,16 5.5,16 Z M11,18 C10.4477153,18 10,18.4477153 10,19 C10,19.5522847 10.4477153,20 11,20 L13,20 C13.5522847,20 14,19.5522847 14,19 C14,18.4477153 13.5522847,18 13,18 L11,18 Z" fill="#000000"/>
-                </g>
-            </svg><!--end::Svg Icon-->
-        </span>
-        <span class="menu-text">Históricos</span>
-        <i class="menu-arrow"></i>
-    </a>
-    <div class="menu-submenu">
-        <i class="menu-arrow"></i>
-        <ul class="menu-subnav">
-            <li class="menu-item menu-item-parent" aria-haspopup="true">
-                <span class="menu-link">
-                    <span class="menu-text">Históricos</span>
-                </span>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/aside-light.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Agrupador</span>
-                </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/aside-light.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Históricos</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</li>
-<!--menu::Tutoriais-->
-<li class="menu-item menu-item-submenu" aria-haspopup="true">
-    <a href="index.html" class="menu-link">
-        <span class="svg-icon menu-icon">
-            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo1/dist/../src/media/svg/icons/Home/Book-open.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <rect x="0" y="0" width="24" height="24"/>
-                    <path d="M13.6855025,18.7082217 C15.9113859,17.8189707 18.682885,17.2495635 22,17 C22,16.9325178 22,13.1012863 22,5.50630526 L21.9999762,5.50630526 C21.9999762,5.23017604 21.7761292,5.00632908 21.5,5.00632908 C21.4957817,5.00632908 21.4915635,5.00638247 21.4873465,5.00648922 C18.658231,5.07811173 15.8291155,5.74261533 13,7 C13,7.04449645 13,10.79246 13,18.2438906 L12.9999854,18.2438906 C12.9999854,18.520041 13.2238496,18.7439052 13.5,18.7439052 C13.5635398,18.7439052 13.6264972,18.7317946 13.6855025,18.7082217 Z" fill="#000000"/>
-                    <path d="M10.3144829,18.7082217 C8.08859955,17.8189707 5.31710038,17.2495635 1.99998542,17 C1.99998542,16.9325178 1.99998542,13.1012863 1.99998542,5.50630526 L2.00000925,5.50630526 C2.00000925,5.23017604 2.22385621,5.00632908 2.49998542,5.00632908 C2.50420375,5.00632908 2.5084219,5.00638247 2.51263888,5.00648922 C5.34175439,5.07811173 8.17086991,5.74261533 10.9999854,7 C10.9999854,7.04449645 10.9999854,10.79246 10.9999854,18.2438906 L11,18.2438906 C11,18.520041 10.7761358,18.7439052 10.4999854,18.7439052 C10.4364457,18.7439052 10.3734882,18.7317946 10.3144829,18.7082217 Z" fill="#000000" opacity="0.3"/>
-                </g>
-            </svg><!--end::Svg Icon-->
-        </span>
-        <span class="menu-text">Tutoriais</span>
-    </a>
 </li>
 
+<!--menu::Questionários-->
+{% tag_menu_open 'Questionario' as menu %}
+
+<li class="menu-item menu-item-submenu {{ menu|safe }}" aria-haspopup="true" data-menu-toggle="hover">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <span class="svg-icon menu-icon">
+            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo3/dist/../src/media/svg/icons/Communication/Clipboard-check.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <rect x="0" y="0" width="24" height="24"/>
+                    <path d="M8,3 L8,3.5 C8,4.32842712 8.67157288,5 9.5,5 L14.5,5 C15.3284271,5 16,4.32842712 16,3.5 L16,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,21 C20,22.1045695 19.1045695,23 18,23 L6,23 C4.8954305,23 4,22.1045695 4,21 L4,5 C4,3.8954305 4.8954305,3 6,3 L8,3 Z" fill="#000000" opacity="0.3"/>
+                    <path d="M10.875,15.75 C10.6354167,15.75 10.3958333,15.6541667 10.2041667,15.4625 L8.2875,13.5458333 C7.90416667,13.1625 7.90416667,12.5875 8.2875,12.2041667 C8.67083333,11.8208333 9.29375,11.8208333 9.62916667,12.2041667 L10.875,13.45 L14.0375,10.2875 C14.4208333,9.90416667 14.9958333,9.90416667 15.3791667,10.2875 C15.7625,10.6708333 15.7625,11.2458333 15.3791667,11.6291667 L11.5458333,15.4625 C11.3541667,15.6541667 11.1145833,15.75 10.875,15.75 Z" fill="#000000"/>
+                    <path d="M11,2 C11,1.44771525 11.4477153,1 12,1 C12.5522847,1 13,1.44771525 13,2 L14.5,2 C14.7761424,2 15,2.22385763 15,2.5 L15,3.5 C15,3.77614237 14.7761424,4 14.5,4 L9.5,4 C9.22385763,4 9,3.77614237 9,3.5 L9,2.5 C9,2.22385763 9.22385763,2 9.5,2 L11,2 Z" fill="#000000"/>
+                </g>
+            </svg><!--end::Svg Icon-->
+        </span>
+        <span class="menu-text">Questionários</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link">
+                    <span class="menu-text">Questionários</span>
+                </span>
+            </li>
+
+            <!--submenu::Segmentos-->
+            {% tag_menu_active 'Questionario' 'Segmentos' as i_Segmentos %}
+            {% tag_acesso_menu user 'Questionario' 'Segmentos' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_Segmentos|safe }}" aria-haspopup="true">
+                    <a href="{% url 'segmento_list' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Segmentos</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <!--submenu::Perguntas-->
+            {% tag_menu_active 'Questionario' 'Perguntas' as i_Perguntas %}
+            {% tag_acesso_menu user 'Questionario' 'Perguntas' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_Perguntas|safe }}" aria-haspopup="true">
+                    <a href="{% url 'pergunta_list' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Perguntas</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <!--submenu::Pesquisas-->
+            {% tag_menu_active 'Questionario' 'Pesquisas' as i_Pesquisas %}
+            {% tag_acesso_menu user 'Questionario' 'Pesquisas' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_Pesquisas|safe }}" aria-haspopup="true">
+                    <a href="{% url 'pesquisa_list' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Pesquisas</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <!--submenu::Publicacoes-->
+            {% tag_menu_active 'Questionario' 'Publicacoes' as i_Publicacoes %}
+            {% tag_acesso_menu user 'Questionario' 'Publicacoes' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_Publicacoes|safe }}" aria-haspopup="true">
+                    <a href="{% url 'publicacao_list' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Publicacoes</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <!--submenu::PublicacaoUnidade-->
+            {% tag_menu_active 'Questionario' 'PublicacaoUnidade' as i_PublicacaoUnidade %}
+            {% tag_acesso_menu user 'Questionario' 'PublicacaoUnidade' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_PublicacaoUnidade|safe }}" aria-haspopup="true">
+                    <a href="{% url 'publicacao_unidade_list' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Pub. Unidade</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</li>
+
+<!--menu::Benchmarking-->
+{% tag_menu_open 'Bench' as menu %}
+
+<li class="menu-item menu-item-submenu {{ menu|safe }}" aria-haspopup="true" data-menu-toggle="hover">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <span class="svg-icon menu-icon">
+            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo1/dist/../src/media/svg/icons/Shopping/Chart-bar1.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <rect x="0" y="0" width="24" height="24"/>
+                    <rect fill="#000000" opacity="0.3" x="12" y="4" width="3" height="13" rx="1.5"/>
+                    <rect fill="#000000" opacity="0.3" x="7" y="9" width="3" height="8" rx="1.5"/>
+                    <path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero"/>
+                    <rect fill="#000000" opacity="0.3" x="17" y="11" width="3" height="6" rx="1.5"/>
+                </g>
+            </svg><!--end::Svg Icon-->
+        </span>
+        <span class="menu-text">Benchmarking</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link">
+                    <span class="menu-text">Benchmarking</span>
+                </span>
+            </li>
+
+            <!--submenu::Configuração-->
+            {% tag_menu_active 'Bench' 'Configuracao' as i_Configuracao %}
+            {% tag_acesso_menu user 'Bench' 'Configuracao' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_Configuracao|safe }}" aria-haspopup="true">
+                    <a href="{% url 'bench_list' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Configuração</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <!--submenu::Validação-->
+            {% tag_menu_active 'Bench' 'Validacao' as i_Validacao %}
+            {% tag_acesso_menu user 'Bench' 'Validacao' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_Validacao|safe }}" aria-haspopup="true">
+                    <a href="{% url 'benri_benchmarking' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Validação</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</li>
+
+<!--menu::Boletim-->
+{% tag_menu_open 'Boletim' as menu %}
+
+<li class="menu-item menu-item-submenu {{ menu|safe }}" aria-haspopup="true" data-menu-toggle="hover">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <span class="svg-icon menu-icon">
+            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo3/dist/../src/media/svg/icons/Communication/Clipboard-list.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <rect x="0" y="0" width="24" height="24"/>
+                    <path d="M8,3 L8,3.5 C8,4.32842712 8.67157288,5 9.5,5 L14.5,5 C15.3284271,5 16,4.32842712 16,3.5 L16,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,21 C20,22.1045695 19.1045695,23 18,23 L6,23 C4.8954305,23 4,22.1045695 4,21 L4,5 C4,3.8954305 4.8954305,3 6,3 L8,3 Z" fill="#000000" opacity="0.3"/>
+                    <path d="M11,2 C11,1.44771525 11.4477153,1 12,1 C12.5522847,1 13,1.44771525 13,2 L14.5,2 C14.7761424,2 15,2.22385763 15,2.5 L15,3.5 C15,3.77614237 14.7761424,4 14.5,4 L9.5,4 C9.22385763,4 9,3.77614237 9,3.5 L9,2.5 C9,2.22385763 9.22385763,2 9.5,2 L11,2 Z" fill="#000000"/>
+                    <rect fill="#000000" opacity="0.3" x="10" y="9" width="7" height="2" rx="1"/>
+                    <rect fill="#000000" opacity="0.3" x="7" y="9" width="2" height="2" rx="1"/>
+                    <rect fill="#000000" opacity="0.3" x="7" y="13" width="2" height="2" rx="1"/>
+                    <rect fill="#000000" opacity="0.3" x="10" y="13" width="7" height="2" rx="1"/>
+                    <rect fill="#000000" opacity="0.3" x="7" y="17" width="2" height="2" rx="1"/>
+                    <rect fill="#000000" opacity="0.3" x="10" y="17" width="7" height="2" rx="1"/>
+                </g>
+            </svg><!--end::Svg Icon-->
+        </span>
+        <span class="menu-text">Boletim</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link">
+                    <span class="menu-text">Boletim</span>
+                </span>
+            </li>
+
+            <!--submenu::Configuração-->
+            {% tag_menu_active 'Boletim' 'Configuracao' as i_Configuracao %}
+            {% tag_acesso_menu user 'Boletim' 'Configuracao' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_Configuracao|safe }}" aria-haspopup="true">
+                    <a href="{% url 'boletim_list' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Configuração</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <!--submenu::Visualização-->
+            {% tag_menu_active 'Boletim' 'Visualizacao' as i_Visualizacao %}
+            {% tag_acesso_menu user 'Boletim' 'Visualizacao' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_Visualizacao|safe }}" aria-haspopup="true">
+                    <a href="{% url 'benri_boletim' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Visualização</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</li>
+
+<!--menu::Arquivos-->
+{% tag_menu_open 'Arquivo' as menu %}
+
+<li class="menu-item menu-item-submenu {{ menu|safe }}" aria-haspopup="true" data-menu-toggle="hover">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <span class="svg-icon menu-icon">
+            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo3/dist/../src/media/svg/icons/Files/File.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <polygon points="0 0 24 0 24 24 0 24"/>
+                    <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                    <rect fill="#000000" x="6" y="11" width="9" height="2" rx="1"/>
+                    <rect fill="#000000" x="6" y="15" width="5" height="2" rx="1"/>
+                </g>
+            </svg><!--end::Svg Icon-->
+        </span>
+        <span class="menu-text">Arquivos</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link">
+                    <span class="menu-text">Arquivos</span>
+                </span>
+            </li>
+
+            <!--submenu::Agrupador-->
+            {% tag_menu_active 'Arquivo' 'AgrupadorArquivo' as i_AgrupadorArquivo %}
+            {% tag_acesso_menu user 'Arquivo' 'AgrupadorArquivo' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_AgrupadorArquivo|safe }}" aria-haspopup="true">
+                    <a href="{% url 'agrupador_arquivo_list' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Agrupador</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <!--submenu::Arquivo-->
+            {% tag_menu_active 'Arquivo' 'Arquivo' as i_Arquivo %}
+            {% tag_acesso_menu user 'Arquivo' 'Arquivo' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_Arquivo|safe }}" aria-haspopup="true">
+                    <a href="{% url 'arquivo_list' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Arquivos</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</li>
+
+<!--menu::Sistema-->
+{% tag_menu_open 'Sistema' as menu %}
+
+<li class="menu-item menu-item-submenu {{ menu|safe }}" aria-haspopup="true" data-menu-toggle="hover">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <span class="svg-icon menu-icon">
+            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo3/dist/../src/media/svg/icons/Code/CMD.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <rect x="0" y="0" width="24" height="24"/>
+                    <path d="M9,15 L7.5,15 C6.67157288,15 6,15.6715729 6,16.5 C6,17.3284271 6.67157288,18 7.5,18 C8.32842712,18 9,17.3284271 9,16.5 L9,15 Z M9,15 L9,9 L15,9 L15,15 L9,15 Z M15,16.5 C15,17.3284271 15.6715729,18 16.5,18 C17.3284271,18 18,17.3284271 18,16.5 C18,15.6715729 17.3284271,15 16.5,15 L15,15 L15,16.5 Z M16.5,9 C17.3284271,9 18,8.32842712 18,7.5 C18,6.67157288 17.3284271,6 16.5,6 C15.6715729,6 15,6.67157288 15,7.5 L15,9 L16.5,9 Z M9,7.5 C9,6.67157288 8.32842712,6 7.5,6 C6.67157288,6 6,6.67157288 6,7.5 C6,8.32842712 6.67157288,9 7.5,9 L9,9 L9,7.5 Z M11,13 L13,13 L13,11 L11,11 L11,13 Z M13,11 L13,7.5 C13,5.56700338 14.5670034,4 16.5,4 C18.4329966,4 20,5.56700338 20,7.5 C20,9.43299662 18.4329966,11 16.5,11 L13,11 Z M16.5,13 C18.4329966,13 20,14.5670034 20,16.5 C20,18.4329966 18.4329966,20 16.5,20 C14.5670034,20 13,18.4329966 13,16.5 L13,13 L16.5,13 Z M11,16.5 C11,18.4329966 9.43299662,20 7.5,20 C5.56700338,20 4,18.4329966 4,16.5 C4,14.5670034 5.56700338,13 7.5,13 L11,13 L11,16.5 Z M7.5,11 C5.56700338,11 4,9.43299662 4,7.5 C4,5.56700338 5.56700338,4 7.5,4 C9.43299662,4 11,5.56700338 11,7.5 L11,11 L7.5,11 Z" fill="#000000" fill-rule="nonzero"/>
+                </g>
+            </svg><!--end::Svg Icon-->
+        </span>
+        <span class="menu-text">Sistema</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link">
+                    <span class="menu-text">Sistema</span>
+                </span>
+            </li>
+
+            <!--submenu::Exportação-->
+            {% tag_menu_active 'Sistema' 'Exportacao' as i_Exportacao %}
+            {% tag_acesso_menu user 'Sistema' 'Exportacao' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_Exportacao|safe }}" aria-haspopup="true">
+                    <a href="{% url 'exportacao' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Exportação</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <!--submenu::Importação-->
+            {% tag_menu_active 'Sistema' 'Importacao' as i_Importacao %}
+            {% tag_acesso_menu user 'Sistema' 'Importacao' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_Importacao|safe }}" aria-haspopup="true">
+                    <a href="{% url 'importacao_list' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Importação</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <!--submenu::Tutorial-->
+            {% tag_menu_active 'Sistema' 'Tutorial' as i_Tutorial %}
+            {% tag_acesso_menu user 'Sistema' 'Tutorial' as acesso_ok %}
+
+            {% if acesso_ok %}
+                <li class="menu-item {{ i_Tutorial|safe }}" aria-haspopup="true">
+                    <a href="{% url 'tutorial_list' %}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Tutorial</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</li>
+
+<!--menu::Relatórios-->
 <li class="menu-section">
     <h4 class="menu-text">Relatórios</h4>
     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 </li>
-<!--menu::Chamados-->
-<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-    <a href="javascript:;" class="menu-link menu-toggle">
-        <span class="svg-icon menu-icon">
-            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo1/dist/../src/media/svg/icons/Communication/Flag.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <rect x="0" y="0" width="24" height="24"/>
-                    <path d="M3.5,3 L5,3 L5,19.5 C5,20.3284271 4.32842712,21 3.5,21 L3.5,21 C2.67157288,21 2,20.3284271 2,19.5 L2,4.5 C2,3.67157288 2.67157288,3 3.5,3 Z" fill="#000000"/>
-                    <path d="M6.99987583,2.99995344 L19.754647,2.99999303 C20.3069317,2.99999474 20.7546456,3.44771138 20.7546439,3.99999613 C20.7546431,4.24703684 20.6631995,4.48533385 20.497938,4.66895776 L17.5,8 L20.4979317,11.3310353 C20.8673908,11.7415453 20.8341123,12.3738351 20.4236023,12.7432941 C20.2399776,12.9085564 20.0016794,13 19.7546376,13 L6.99987583,13 L6.99987583,2.99995344 Z" fill="#000000" opacity="0.3"/>
-                </g>
-            </svg><!--end::Svg Icon-->
-        </span>
-        <span class="menu-text">Chamados</span>
-        <i class="menu-arrow"></i>
-    </a>
-    <div class="menu-submenu">
-        <i class="menu-arrow"></i>
-        <ul class="menu-subnav">
-            <li class="menu-item menu-item-parent" aria-haspopup="true">
-                <span class="menu-link">
-                    <span class="menu-text">Chamados</span>
-                </span>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/aside-light.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Chamados x Grupo</span>
-                </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/aside-light.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Chamados x Usina</span>
-                </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/header-dark.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Chamados x Solução</span>
-                </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/header-dark.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Chamados x Categoria</span>
-                </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/header-dark.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Chamados x Equipe</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</li>
-<!--menu::Acessos-->
-<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-    <a href="javascript:;" class="menu-link menu-toggle">
-        <span class="svg-icon menu-icon">
-            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo1/dist/../src/media/svg/icons/Communication/Group.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <polygon points="0 0 24 0 24 24 0 24"/>
-                    <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
-                    <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>
-                </g>
-            </svg><!--end::Svg Icon-->
-        </span>
-        <span class="menu-text">Acessos</span>
-        <i class="menu-arrow"></i>
-    </a>
-    <div class="menu-submenu">
-        <i class="menu-arrow"></i>
-        <ul class="menu-subnav">
-            <li class="menu-item menu-item-parent" aria-haspopup="true">
-                <span class="menu-link">
-                    <span class="menu-text">Acessos</span>
-                </span>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/aside-light.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Acessos x Grupo</span>
-                </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/aside-light.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Acessos x Usinas</span>
-                </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="layout/themes/header-dark.html" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Cliques no Dashboard</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</li>
-<!--menu::Composto-->
-<li class="menu-item menu-item-submenu" aria-haspopup="true">
-    <a href="index.html" class="menu-link">
-        <span class="svg-icon menu-icon">
-            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo1/dist/../src/media/svg/icons/Shopping/Chart-bar2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <rect x="0" y="0" width="24" height="24"/>
-                    <rect fill="#000000" opacity="0.3" x="17" y="4" width="3" height="13" rx="1.5"/>
-                    <rect fill="#000000" opacity="0.3" x="12" y="9" width="3" height="8" rx="1.5"/>
-                    <path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero"/>
-                    <rect fill="#000000" opacity="0.3" x="7" y="11" width="3" height="6" rx="1.5"/>
-                </g>
-            </svg><!--end::Svg Icon-->
-        </span>
-        <span class="menu-text">Composto</span>
-    </a>
-</li>
+<!--menu::Download Arquivos-->
+{% tag_menu_active 'Relatorios' 'DownloadArquivos' as menu %}
+{% tag_acesso_menu user 'Relatorios' 'DownloadArquivos' as acesso_ok %}
+
+{% if acesso_ok %}
+    <li class="menu-item menu-item-submenu {{ menu|safe }}" aria-haspopup="true">
+        <a href="{% url 'download_arquivos' %}" class="menu-link">
+            <span class="svg-icon menu-icon">
+                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo3/dist/../src/media/svg/icons/Files/Download.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24"/>
+                        <path d="M2,13 C2,12.5 2.5,12 3,12 C3.5,12 4,12.5 4,13 C4,13.3333333 4,15 4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 C2,15 2,13.3333333 2,13 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                        <rect fill="#000000" opacity="0.3" transform="translate(12.000000, 8.000000) rotate(-180.000000) translate(-12.000000, -8.000000) " x="11" y="1" width="2" height="14" rx="1"/>
+                        <path d="M7.70710678,15.7071068 C7.31658249,16.0976311 6.68341751,16.0976311 6.29289322,15.7071068 C5.90236893,15.3165825 5.90236893,14.6834175 6.29289322,14.2928932 L11.2928932,9.29289322 C11.6689749,8.91681153 12.2736364,8.90091039 12.6689647,9.25670585 L17.6689647,13.7567059 C18.0794748,14.1261649 18.1127532,14.7584547 17.7432941,15.1689647 C17.3738351,15.5794748 16.7415453,15.6127532 16.3310353,15.2432941 L12.0362375,11.3779761 L7.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000004, 12.499999) rotate(-180.000000) translate(-12.000004, -12.499999) "/>
+                    </g>
+                </svg><!--end::Svg Icon-->
+            </span>
+            <span class="menu-text">Download Arquivos</span>
+        </a>
+    </li>
+{% endif %}
+
+<!--menu::Perguntas Respondidas-->
+{% tag_menu_active 'Relatorios' 'PerguntasRespondidas' as menu %}
+{% tag_acesso_menu user 'Relatorios' 'PerguntasRespondidas' as acesso_ok %}
+
+{% if acesso_ok %}
+    <li class="menu-item menu-item-submenu {{ menu|safe }}" aria-haspopup="true">
+        <a href="{% url 'perguntas_respondidas' %}" class="menu-link">
+            <span class="svg-icon menu-icon">
+                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo3/dist/../src/media/svg/icons/Design/Edit.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24"/>
+                        <path d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "/>
+                        <rect fill="#000000" opacity="0.3" x="5" y="20" width="15" height="2" rx="1"/>
+                    </g>
+                </svg><!--end::Svg Icon-->
+            </span>
+            <span class="menu-text">Perguntas Respondidas</span>
+        </a>
+    </li>
+{% endif %}
+
+<!--menu::Acesso Portal-->
+{% tag_menu_active 'Relatorios' 'AcessoPortal' as menu %}
+{% tag_acesso_menu user 'Relatorios' 'AcessoPortal' as acesso_ok %}
+
+{% if acesso_ok %}
+    <li class="menu-item menu-item-submenu {{ menu|safe }}" aria-haspopup="true">
+        <a href="{% url 'acesso_portal' %}" class="menu-link">
+            <span class="svg-icon menu-icon">
+                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo3/dist/../src/media/svg/icons/Communication/Shield-user.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24"/>
+                        <path d="M4,4 L11.6314229,2.5691082 C11.8750185,2.52343403 12.1249815,2.52343403 12.3685771,2.5691082 L20,4 L20,13.2830094 C20,16.2173861 18.4883464,18.9447835 16,20.5 L12.5299989,22.6687507 C12.2057287,22.8714196 11.7942713,22.8714196 11.4700011,22.6687507 L8,20.5 C5.51165358,18.9447835 4,16.2173861 4,13.2830094 L4,4 Z" fill="#000000" opacity="0.3"/>
+                        <path d="M12,11 C10.8954305,11 10,10.1045695 10,9 C10,7.8954305 10.8954305,7 12,7 C13.1045695,7 14,7.8954305 14,9 C14,10.1045695 13.1045695,11 12,11 Z" fill="#000000" opacity="0.3"/>
+                        <path d="M7.00036205,16.4995035 C7.21569918,13.5165724 9.36772908,12 11.9907452,12 C14.6506758,12 16.8360465,13.4332455 16.9988413,16.5 C17.0053266,16.6221713 16.9988413,17 16.5815,17 C14.5228466,17 11.463736,17 7.4041679,17 C7.26484009,17 6.98863236,16.6619875 7.00036205,16.4995035 Z" fill="#000000" opacity="0.3"/>
+                    </g>
+                </svg><!--end::Svg Icon-->
+            </span>
+            <span class="menu-text">Acesso Portal</span>
+        </a>
+    </li>
+{% endif %}
+
+<!--menu::Acesso Benchmarking-->
+{% tag_menu_active 'Relatorios' 'AcessoBench' as menu %}
+{% tag_acesso_menu user 'Relatorios' 'AcessoBench' as acesso_ok %}
+
+{% if acesso_ok %}
+    <li class="menu-item menu-item-submenu {{ menu|safe }}" aria-haspopup="true">
+        <a href="{% url 'acesso_bench' %}" class="menu-link">
+            <span class="svg-icon menu-icon">
+                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo1/dist/../src/media/svg/icons/Shopping/Chart-bar2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24"/>
+                        <rect fill="#000000" opacity="0.3" x="17" y="4" width="3" height="13" rx="1.5"/>
+                        <rect fill="#000000" opacity="0.3" x="12" y="9" width="3" height="8" rx="1.5"/>
+                        <path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero"/>
+                        <rect fill="#000000" opacity="0.3" x="7" y="11" width="3" height="6" rx="1.5"/>
+                    </g>
+                </svg><!--end::Svg Icon-->
+            </span>
+            <span class="menu-text">Acesso Benchmarking</span>
+        </a>
+    </li>
+{% endif %}
+
+<!--menu::Acesso Boletim-->
+{% tag_menu_active 'Relatorios' 'AcessoBoletim' as menu %}
+{% tag_acesso_menu user 'Relatorios' 'AcessoBoletim' as acesso_ok %}
+
+{% if acesso_ok %}
+    <li class="menu-item menu-item-submenu {{ menu|safe }}" aria-haspopup="true">
+        <a href="{% url 'acesso_boletim' %}" class="menu-link">
+            <span class="svg-icon menu-icon">
+                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/keen/releases/2021-04-21-040700/theme/demo3/dist/../src/media/svg/icons/Shopping/Chart-bar1.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24"/>
+                        <rect fill="#000000" opacity="0.3" x="12" y="4" width="3" height="13" rx="1.5"/>
+                        <rect fill="#000000" opacity="0.3" x="7" y="9" width="3" height="8" rx="1.5"/>
+                        <path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero"/>
+                        <rect fill="#000000" opacity="0.3" x="17" y="11" width="3" height="6" rx="1.5"/>
+                    </g>
+                </svg><!--end::Svg Icon-->
+            </span>
+            <span class="menu-text">Acesso Boletim</span>
+        </a>
+    </li>
+{% endif %}

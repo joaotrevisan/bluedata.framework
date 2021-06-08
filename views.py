@@ -4,12 +4,14 @@ import boto3
 from decouple import config
 from botocore.config import Config
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from bluedata.defs import set_context_create, set_context_list, set_context_update, set_context_delete
-from bluedata.defs import set_message, toggle_active
+from apps.core.defs import set_dispatch
+from bluedata.defs import set_context_create, set_context_list, set_context_update, set_context_delete, \
+    get_base_active_view
+from bluedata.defs import set_message
 from bluedata.helpers import remover_acentos, reverse_url
 
 
@@ -20,9 +22,13 @@ class BaseListView(LoginRequiredMixin, ListView):
     filterset_class = None
     base_url = None
     template_title = None
+    access = None
     fields = None
     paginate_by = 7
     template_name = 'bluedata_templates/list.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        return set_dispatch(self, ListView)
 
     def get_queryset(self):
         # Get the queryset however you usually would.  For example:
@@ -36,7 +42,7 @@ class BaseListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        set_context_list(context, self.base_url, self.template_title)
+        set_context_list(context, self)
         # Pass the filterset to the template - it provides the form.
         context['filterset'] = self.filterset
         context['fields'] = self.fields
@@ -46,11 +52,15 @@ class BaseListView(LoginRequiredMixin, ListView):
 class BaseCreateView(LoginRequiredMixin, CreateView):
     base_url = None
     template_title = None
+    access = None
     template_name = 'bluedata_templates/form.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        return set_dispatch(self, CreateView)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        set_context_create(context, self, self.base_url, self.template_title)
+        set_context_create(context, self)
         return context
 
     def get_success_url(self):
@@ -63,11 +73,15 @@ class BaseCreateView(LoginRequiredMixin, CreateView):
 class BaseUpdateView(LoginRequiredMixin, UpdateView):
     base_url = None
     template_title = None
+    access = None
     template_name = 'bluedata_templates/form.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        return set_dispatch(self, UpdateView)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        set_context_update(context, self, self.base_url, self.template_title)
+        set_context_update(context, self)
         return context
 
     def get_success_url(self):
@@ -80,11 +94,15 @@ class BaseUpdateView(LoginRequiredMixin, UpdateView):
 class BaseDeleteView(LoginRequiredMixin, DeleteView):
     base_url = None
     template_title = None
+    access = None
     template_name = 'bluedata_templates/delete.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        return set_dispatch(self, DeleteView)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        set_context_delete(context, self, self.base_url, self.template_title)
+        set_context_delete(context, self)
         return context
 
     def get_success_url(self):
@@ -97,11 +115,10 @@ class BaseDeleteView(LoginRequiredMixin, DeleteView):
 class BaseActiveView(LoginRequiredMixin, View):
     model = None
     base_url = None
+    access = None
 
     def get(self, *args, **kwargs):
-        msg = toggle_active(self.model.objects.get(id=kwargs['pk']))
-        set_message(self, msg)
-        return HttpResponseRedirect(reverse_url('{}_list'.format(self.base_url)))
+        return get_base_active_view(self, kwargs)
 
 
 # Get signed url from Amazon S3

@@ -11,7 +11,8 @@
 #     model = [model_name]
 #     filterset_class = [model_name]Filter
 #     base_url = '[base_url]'
-#     template_title = 'Lista de [model_name]s'
+#     template_title = '[model_name]s'
+#     access = {'menu': 'Sistema', 'item': '[model_name]', 'action': 'list'}
 #     fields = [
 #         {'field': 'id', 'type': 'CharField', 'verbose': '#'},
 #         {'field': 'titulo', 'type': 'CharField', 'verbose': 'Título'},
@@ -26,6 +27,7 @@
 #     form_class = [model_name]Form
 #     base_url = '[base_url]'
 #     template_title = '[model_name]'
+#     access = {'menu': 'Sistema', 'item': '[model_name]', 'action': 'create'}
 #
 #
 # # Update
@@ -35,6 +37,7 @@
 #     form_class = [model_name]Form
 #     base_url = '[base_url]'
 #     template_title = '[model_name]'
+#     access = {'menu': 'Sistema', 'item': '[model_name]', 'action': 'update'}
 #
 #
 # # Delete
@@ -43,6 +46,7 @@
 #     model = [model_name]
 #     base_url = '[base_url]'
 #     template_title = '[model_name]'
+#     access = {'menu': 'Sistema', 'item': '[model_name]', 'action': 'delete'}
 #
 #
 # # ToggleActive
@@ -50,3 +54,4 @@
 # class [model_name]Active(BaseActiveView):
 #     model = [model_name]
 #     base_url = '[base_url]'
+#     access = {'menu': 'Sistema', 'item': '[model_name]', 'action': 'active'}

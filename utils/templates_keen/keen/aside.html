@@ -39,7 +39,7 @@
             <ul class="menu-nav">
                 {% include 'keen/aside_public.html' %}
 
-                {% if 'FERMENTEC' in user.perfil or user.is_superuser %}
+                {% if 'BENRI' in user.perfil or user.is_superuser %}
                     {% include 'keen/aside_admin.html' %}
                 {% endif %}
 
