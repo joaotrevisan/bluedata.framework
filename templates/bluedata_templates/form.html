@@ -95,6 +95,9 @@
             </div>
             <div class="card-body">
                 {% include template_form_fields %}
+
+                <!--erros do form-->
+                {% include 'bluedata_interface/form_errors.html' %}
             </div>
         </div>
     </form>
@@ -117,5 +120,10 @@
         {% endif %}
 
     </script>
+
+    <!--Permite incluir novos scripts-->
+    {% if template_scripts %}
+        {% include template_scripts %}
+    {% endif %}
 
 {% endblock %}

@@ -3,7 +3,7 @@
 
 <div class="form-group col-md-{{col}}" id="div_{{ field.name }}">
     {% if field.field.widget.input_type == 'checkbox' %}
-        <label class="checkbox">
+        <label class="checkbox checkbox-success">
             <input type="checkbox" {% if field.value %} checked {% endif %} name="{{ field.name }}" id="id_{{ field.name }}" >
             <span></span> &nbsp;&nbsp;{{ field.label }}
         </label>

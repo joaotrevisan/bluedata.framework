@@ -48,6 +48,7 @@ def set_context_create(context, self):
     context['template_subtitle'] = 'adicionar'
     context['template_form_fields'] = 'bluedata_interface/template_form_render.html'
     context['template_btn_save'] = True
+    context['template_scripts'] = None
 
     btn_back = set_button('Voltar', reverse_url('{}_list'.format(url)), 'btn-outline-secondary', 'la la-angle-left')
     context['template_buttons'] = [btn_back]
@@ -73,6 +74,7 @@ def set_context_update(context, self):
     context['template_url_active'] = reverse_url('{}_active'.format(url), [str(self.object.id)])
     context['template_form_fields'] = 'bluedata_interface/template_form_render.html'
     context['template_btn_save'] = True
+    context['template_scripts'] = None
 
     btn_back = set_button('Voltar', reverse_url('{}_list'.format(url)), 'btn-outline-secondary', 'la la-angle-left')
     context['template_buttons'] = [btn_back]

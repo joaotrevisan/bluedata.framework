@@ -17,3 +17,8 @@
 
 /* text-muted para a ser text-dark-50 */
 .text-muted { color: #7E8299 !important }
+
+/* deixa o ck-editor com width=100% */
+.my-ckeditor .django-ckeditor-widget{
+    min-width: 100%;
+}
