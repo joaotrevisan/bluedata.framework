@@ -40,7 +40,6 @@ def set_context_create(context, self):
     # Set session and menu
     self.request.session['menu'] = self.access['menu']
     self.request.session['item'] = self.access['item']
-    self.request.session['uuid'] = None
 
     # Templates
     context['template'] = 'keen.html'

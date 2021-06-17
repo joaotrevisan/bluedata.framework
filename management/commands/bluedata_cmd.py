@@ -53,18 +53,18 @@ class Command(BaseCommand):
 def create_file(self, file, app_path, model_name, base_url):
     try:
         src = 'bluedata/templates/bluedata_modelos/{}.py'.format(file)
-        dst = '{}/{}.py'.format(app_path, file)
-        bkp = '{}/_{}.py'.format(app_path, file)
+        dst = '{}/_{}.py'.format(app_path, file)
+        # bkp = '{}/_{}.py'.format(app_path, file)
 
         # backup do arquivo original
-        if os.path.isfile(dst):
-            copyfile(dst, bkp)
-            self.stdout.write('>>> backup: {}'.format(bkp))
+        # if os.path.isfile(dst):
+        #     copyfile(dst, bkp)
+        #     self.stdout.write('>>> backup: {}'.format(bkp))
 
-        # substitui por modelo
+        # cria o modelo
         if os.path.isfile(src):
             copyfile(src, dst)
-            self.stdout.write('>>> overwrite: {}'.format(dst))
+            self.stdout.write('>>> copiando: {}'.format(dst))
 
         # altera as chaves nos arquivos
         replace_infile(dst, '[app_path]', app_path.replace('/', '.'))
