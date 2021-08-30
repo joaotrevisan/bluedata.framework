@@ -5,7 +5,7 @@ Componente bluedata: App
 # REQUISITOS
 
 Incluir a pasta "bluedata" na raiz do projeto
-git submodule add https://github.com/joaotrevisan/bluedata.app.git bluedata
+git submodule add https://github.com/joaotrevisan/bluedata.framework.git bluedata
 
 O template principal (/templates) deve chamar "keen.html"
 O nome do template pode ser sobrescrito em set_context_[list, create, update, delete], através da variável context['template']
