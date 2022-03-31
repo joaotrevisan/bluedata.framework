@@ -1,5 +1,5 @@
-# bluedata.app
-Componente bluedata: App
+# bluedata.framework
+Framework base para Desenvolvimento
 
 
 # REQUISITOS
